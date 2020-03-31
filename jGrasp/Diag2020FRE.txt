@@ -1,0 +1,132 @@
+// arm.getCurrentPos() and arm.getCurrentIndex() are same, there is a typo in the Diag Test
+
+public void reset() {
+	if (arm.getCurrentPos() == 0) {
+		if (!arm.isFacingRight()) {
+			changeDirection();
+		}
+	} else if (arm.getCurrentPos() == 1) {
+		if (arm.isFacingRight()) {
+			changeDirection();
+		}
+		moveForward(1);
+		changeDirection();
+	} else {
+		if (arm.isFacingRight()) {
+			changeDirection();
+		}
+		moveForward(2);
+		changeDirection();
+	}
+}
+
+public int mostAcidic() {
+	Solution leastPH;
+	if (s0.getPH() < s1.getPH()) {
+		if (s0.getPH() < s2.getPH()) {
+			leastPH = s0;
+		} else {
+			leastPH = s2;
+		}
+	} else {
+		if (s1.getPH() < s2.getPH()) {
+			leastPH = s1;
+		} else {
+			leastPH = s2;
+		}
+	}
+
+	if (leastPH.getPH() <= 6) {
+		if (arm.getCurrentPos() < leastPH.getPos()) {
+			if (!arm.isFacingRight()) {
+				changeDirection();
+			}
+			moveForward(leastPH.getPos() - arm.getCurrentPos());
+		} else if (arm.getCurrentPos() > leastPH.getPos()) {
+			if (arm.isFacingRight()) {
+				changeDirection();
+			}
+			moveForward(arm.getCurrentPos(() - leastPH.getPos());
+			changeDirection();
+		} else {
+			if (!arm.isFacingRight()) {
+				changeDirection();
+			}
+		}
+	} else {
+		reset();
+		return -1;
+	}
+}
+
+public class Cruise {
+	private int signups;
+	private int price;
+
+	public Cruise(int s, int p) {
+		signups = s;
+		price = p;
+	}
+
+	public void setPrice(int p) {
+		price = p;
+	}
+
+	public void checkResponse(String resp) {
+		if (resp.indexOf("cruise") != -1) {
+			signups++;
+		}
+	}
+
+	public int calculateRevenue() {
+		if (signups >= 200 && signups <= 300) {
+			return signups * (price - 350);
+		} else if (signups > 300) {
+			return signups * (price - 500);
+		} else {
+			return signups * price;
+		}
+	}
+}
+
+public ArrayList<Integer> getBlankPositions() {
+	int wordNum = countWords();
+	ArrayList<Integer> blanks = new ArrayList<Integer>();
+	String temp = sentence;
+	for (int i = 0; i < wordNum - 1; i++) {
+		int index = temp.indexOf(" ");
+		blanks.add(index);
+		temp = sentence.substring(index + 1);
+	}
+	return blanks;
+}
+
+public String[] getWords() {
+	int wordNum = countWords();
+	ArrayList<Integer> blanks = getBlankPositions();
+	String[] words = new String[wordNum];
+	words[0] = sentence.substring(0, blanks.get(0));
+	for (int i = 0; i < wordNum - 2; i++) {
+		words[i + 1] = sentence.substring(blanks.get(i) + 1, blanks.get(i + 1));
+	}
+	words[wordNum - 1] = sentence.substring(blanks.get(wordNum - 2) + 1);
+	return words;
+}
+
+public void reverseAllRows() {
+	for (int i = 0; i < mat.length; i++) {
+		ArrayUtils.reverseArray(mat[i]);
+	}
+}
+
+public void reverseMatrix() {
+	reverseAllRows();
+	int height = mat.length;
+	for (int i = 0; i < height / 2; i++) {
+		for (int j = 0; j < mat[i].length; j++) {
+			int temp = mat[height - i - 1][j];
+			mat[height - i - 1][j] = mat[i][j];
+			mat[i][j] = temp;
+		}
+	}
+}
